@@ -1,1 +1,73 @@
-hello world!
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Basic HTML Elements</title>
+	<style>
+		body { max-width: 760px; margin: 2rem auto; padding: 0 1rem; font: 1rem/1.6 system-ui, sans-serif; color: #243044; }
+		header, footer { padding: 1rem 0; border-bottom: 1px solid #d8dee8; }
+		footer { border-top: 1px solid #d8dee8; border-bottom: 0; margin-top: 2rem; }
+		nav a { margin-right: 1rem; }
+		section { padding: 1rem 0; border-bottom: 1px solid #e5e9f0; }
+		table { border-collapse: collapse; }
+		th, td { border: 1px solid #aeb8c7; padding: .4rem .8rem; text-align: left; }
+		label { display: inline-block; min-width: 8rem; }
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Basic HTML Elements</h1>
+		<p>A small, practical tour of common page elements.</p>
+		<nav aria-label="Page sections">
+			<a href="#text">Text</a><a href="#lists">Lists</a><a href="#table">Table</a><a href="#form">Form</a>
+		</nav>
+	</header>
+
+	<main>
+		<section id="text">
+			<h2>Text and links</h2>
+			<p>HTML can structure <strong>important text</strong>, <em>emphasized text</em>, and <a href="https://developer.mozilla.org/">links to useful resources</a>.</p>
+			<p>Here is some <mark>highlighted text</mark>, a line break,<br>and inline code: <code>&lt;p&gt;Hello!&lt;/p&gt;</code>.</p>
+			<blockquote><p>“The journey of a thousand miles begins with a single step.”</p></blockquote>
+			<hr>
+		</section>
+
+		<section id="lists">
+			<h2>Lists</h2>
+			<h3>Things to pack</h3>
+			<ul><li>Notebook</li><li>Water bottle</li><li>Camera</li></ul>
+			<h3>Getting started</h3>
+			<ol><li>Choose a topic</li><li>Write some content</li><li>Share the page</li></ol>
+		</section>
+
+		<section id="table">
+			<h2>A simple table</h2>
+			<table>
+				<caption>Weekly activities</caption>
+				<thead><tr><th scope="col">Day</th><th scope="col">Activity</th></tr></thead>
+				<tbody>
+					<tr><th scope="row">Monday</th><td>Read</td></tr>
+					<tr><th scope="row">Wednesday</th><td>Practice</td></tr>
+					<tr><th scope="row">Friday</th><td>Share</td></tr>
+				</tbody>
+			</table>
+		</section>
+
+		<section id="form">
+			<h2>Form elements</h2>
+			<form action="#" method="get">
+				<p><label for="visitor-name">Your name</label><input id="visitor-name" name="name" type="text" placeholder="Alex"></p>
+				<p><label for="favorite">Favorite element</label>
+					<select id="favorite" name="favorite"><option>Headings</option><option>Lists</option><option>Tables</option></select>
+				</p>
+				<p><label for="comments">Comments</label><textarea id="comments" name="comments" rows="3" placeholder="Say hello..."></textarea></p>
+				<p><label><input type="checkbox" name="updates"> Send me updates</label></p>
+				<button type="submit">Submit</button>
+			</form>
+		</section>
+	</main>
+
+	<footer><small>That’s a basic page built with semantic HTML.</small></footer>
+</body>
+</html>
