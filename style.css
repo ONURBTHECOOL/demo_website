@@ -6,11 +6,13 @@
             color: #243044;
         }
 
+
         header,
         footer {
             padding: 1rem 0;
             border-bottom: 1px solid #d8dee8;
         }
+
 
         footer {
             border-top: 1px solid #d8dee8;
@@ -18,18 +20,22 @@
             margin-top: 2rem;
         }
 
+
         nav a {
             margin-right: 1rem;
         }
+
 
         section {
             padding: 1rem 0;
             border-bottom: 1px solid #e5e9f0;
         }
 
+
         table {
             border-collapse: collapse;
         }
+
 
         th,
         td {
@@ -37,6 +43,7 @@
             padding: .4rem .8rem;
             text-align: left;
         }
+
 
         label {
             display: inline-block;
