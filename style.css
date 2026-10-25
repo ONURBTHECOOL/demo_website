@@ -43,7 +43,16 @@
             padding: .4rem .8rem;
             text-align: left;
         }
-
+        div {
+            border: 2px solid #aebcc3;
+            padding: .4rem .8rem;
+            text-align: right;
+        }
+        section {
+            border: 10px solid #ffffff;
+            padding: .4rem .8rem;
+            text-align: left;
+        }
 
         label {
             display: inline-block;
