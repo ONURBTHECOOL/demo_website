@@ -1,11 +1,11 @@
       :root {
-          --bg: #f3f4f6;
-          --panel: #ffffff;
-          --panel-2: #eef2ff;
+          --bg: #1d0000;
+          --panel: #00000000;
+          --panel-2: #6b728a;
           --text: #1f2937;
           --muted: #6b7280;
-          --accent: #4f46e5;
-          --accent-2: #818cf8;
+          --accent: #108d00;
+          --accent-2: #81f8bd;
           --danger: #ef4444;
           --shadow: rgba(17, 24, 39, 0.12);
       }
@@ -19,7 +19,7 @@
           min-height: 100vh;
           display: grid;
           place-items: center;
-          background: linear-gradient(135deg, #e0e7ff, var(--bg));
+          background: linear-gradient(135deg, #1d0000, var(--bg));
           font-family: Arial, Helvetica, sans-serif;
           color: var(--text);
       }
