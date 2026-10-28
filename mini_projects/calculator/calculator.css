@@ -1,0 +1,101 @@
+      :root {
+          --bg: #f3f4f6;
+          --panel: #ffffff;
+          --panel-2: #eef2ff;
+          --text: #1f2937;
+          --muted: #6b7280;
+          --accent: #4f46e5;
+          --accent-2: #818cf8;
+          --danger: #ef4444;
+          --shadow: rgba(17, 24, 39, 0.12);
+      }
+
+      * {
+          box-sizing: border-box;
+      }
+
+      body {
+          margin: 0;
+          min-height: 100vh;
+          display: grid;
+          place-items: center;
+          background: linear-gradient(135deg, #e0e7ff, var(--bg));
+          font-family: Arial, Helvetica, sans-serif;
+          color: var(--text);
+      }
+
+      .calculator {
+          width: min(92vw, 360px);
+          background: var(--panel);
+          border-radius: 22px;
+          padding: 20px;
+          box-shadow: 0 20px 40px var(--shadow);
+      }
+
+      .display {
+          background: var(--panel-2);
+          border-radius: 16px;
+          padding: 18px 16px;
+          text-align: right;
+          min-height: 88px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          margin-bottom: 18px;
+      }
+
+      .previous {
+          font-size: 1rem;
+          color: var(--muted);
+          min-height: 24px;
+          word-break: break-all;
+      }
+
+      .current {
+          font-size: clamp(2rem, 5vw, 2.8rem);
+          font-weight: 700;
+          word-break: break-all;
+      }
+
+      .buttons {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 12px;
+      }
+
+      button {
+          border: none;
+          border-radius: 14px;
+          min-height: 60px;
+          font-size: 1.2rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: transform 0.12s ease, opacity 0.2s ease;
+          background: #f3f4f6;
+          color: var(--text);
+      }
+
+      button:hover {
+          opacity: 0.96;
+      }
+
+      button:active {
+          transform: translateY(1px) scale(0.99);
+      }
+
+      .operator,
+      .action {
+          background: #e0e7ff;
+          color: var(--accent);
+      }
+
+      .equals {
+          background: linear-gradient(135deg, var(--accent), var(--accent-2));
+          color: white;
+          grid-column: span 2;
+      }
+
+      .clear {
+          background: #fee2e2;
+          color: var(--danger);
+      }
