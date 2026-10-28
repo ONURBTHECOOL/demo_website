@@ -1,7 +1,7 @@
       :root {
           --bg: #1d0000;
           --panel: #00000000;
-          --panel-2: #6b728a;
+          --panel-2: #27532b;
           --text: #1f2937;
           --muted: #6b7280;
           --accent: #108d00;
@@ -19,7 +19,7 @@
           min-height: 100vh;
           display: grid;
           place-items: center;
-          background: linear-gradient(135deg, #1d0000, var(--bg));
+          background: linear-gradient(135deg, #747034, var(--bg));
           font-family: Arial, Helvetica, sans-serif;
           color: var(--text);
       }
