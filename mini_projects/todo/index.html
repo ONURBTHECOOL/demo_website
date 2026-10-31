@@ -9,13 +9,27 @@
 </head>
 
 <body>
-    <h1>To-Do list</h1>
+    <form>
+        <fieldset>
+            <legend>Todo list</legend>
 
-    <ol>
-        <li>Write some code</li>
-        <li>Test some code</li>
-        <li>Re-write some code</li>
-    </ol>
+            <label>
+                <input type="checkbox" name="tasks" value="task1" checked>
+                Write some code
+            </label><br>
+
+            <label>
+                <input type="checkbox" name="tasks" value="task2">
+                Review some code
+            </label><br>
+
+            <label>
+                <input type="checkbox" name="tasks" value="task3">
+                Re-write some code
+            </label>
+        </fieldset>
+    </form>
+
     <p><em>Inspect this page in dev tools to look at the HTML structure.</em></p>
     <a href="https://onurbthecool.github.io/demo_website/">Back Home</a>
 </body>
