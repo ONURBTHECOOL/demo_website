@@ -58,3 +58,6 @@
             display: inline-block;
             min-width: 8rem;
         }
+        .class{
+            border: 1000px solid #ff0000;
+        }
