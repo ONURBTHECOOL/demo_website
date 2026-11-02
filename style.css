@@ -58,6 +58,6 @@
             display: inline-block;
             min-width: 8rem;
         }
-        .class{
+        p.class{
             border: 10px solid #00600b;
         }
