@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7fa">
+    <title>Weather</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: system-ui, sans-serif;
+        color: #202a35;
+        background: #f5f7fa;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+      }
+
+      main {
+        width: min(100%, 22rem);
+      }
+
+      h1 {
+        margin: 0 0 1.25rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      form {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      input,
+      button {
+        min-height: 2.75rem;
+        border: 1px solid #dce2e8;
+        border-radius: 0.5rem;
+        font: inherit;
+      }
+
+      input {
+        min-width: 0;
+        flex: 1;
+        padding: 0 0.75rem;
+        background: #fff;
+      }
+
+      button {
+        padding: 0 0.9rem;
+        border-color: #202a35;
+        color: #fff;
+        background: #202a35;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        cursor: wait;
+        opacity: 0.65;
+      }
+
+      input:focus-visible,
+      button:focus-visible {
+        outline: 2px solid #5b86b5;
+        outline-offset: 2px;
+      }
+
+      #result {
+        min-height: 7rem;
+        margin-top: 1rem;
+        padding: 1rem;
+        border: 1px solid #e3e8ed;
+        border-radius: 0.75rem;
+        background: #fff;
+      }
+
+      #message {
+        margin: 0;
+        color: #627080;
+        font-size: 0.9rem;
+      }
+
+      #weather h2 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      #temperature {
+        margin: 0.25rem 0;
+        font-size: 2.5rem;
+        line-height: 1.15;
+      }
+
+      #condition {
+        margin: 0;
+        color: #627080;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Weather</h1>
+      <form id="search-form">
+        <input id="city" name="city" type="search" aria-label="City" placeholder="Enter a city" required>
+        <button id="search-button" type="submit">Search</button>
+      </form>
+      <section id="result" aria-live="polite" aria-atomic="true">
+        <p id="message">Search for a city to see its weather.</p>
+        <div id="weather" hidden>
+          <h2 id="location"></h2>
+          <p id="temperature"></p>
+          <p id="condition"></p>
+        </div>
+      </section>
+    </main>
+    <script>
+      const form = document.querySelector("#search-form");
+      const cityInput = document.querySelector("#city");
+      const button = document.querySelector("#search-button");
+      const message = document.querySelector("#message");
+      const weather = document.querySelector("#weather");
+
+      const conditions = {
+        0: "Clear sky",
+        1: "Mostly clear",
+        2: "Partly cloudy",
+        3: "Overcast",
+        45: "Fog",
+        48: "Rime fog",
+        51: "Light drizzle",
+        53: "Drizzle",
+        55: "Heavy drizzle",
+        56: "Freezing drizzle",
+        57: "Heavy freezing drizzle",
+        61: "Light rain",
+        63: "Rain",
+        65: "Heavy rain",
+        66: "Freezing rain",
+        67: "Heavy freezing rain",
+        71: "Light snow",
+        73: "Snow",
+        75: "Heavy snow",
+        77: "Snow grains",
+        80: "Light showers",
+        81: "Showers",
+        82: "Heavy showers",
+        85: "Light snow showers",
+        86: "Heavy snow showers",
+        95: "Thunderstorm",
+        96: "Thunderstorm with hail",
+        99: "Thunderstorm with heavy hail"
+      };
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const city = cityInput.value.trim();
+        if (!city) return;
+
+        button.disabled = true;
+        weather.hidden = true;
+        message.hidden = false;
+        message.textContent = "Loading…";
+
+        try {
+          const searchParams = new URLSearchParams({
+            name: city,
+            count: "1",
+            language: "en",
+            format: "json"
+          });
+          const locationResponse = await fetch(
+            `https://geocoding-api.open-meteo.com/v1/search?${searchParams}`
+          );
+          if (!locationResponse.ok) throw new Error("Could not search for that city.");
+
+          const locations = await locationResponse.json();
+          const place = locations.results?.[0];
+          if (!place) throw new Error("City not found. Try another name.");
+
+          const weatherParams = new URLSearchParams({
+            latitude: place.latitude,
+            longitude: place.longitude,
+            current: "temperature_2m,weather_code",
+            temperature_unit: "celsius"
+          });
+          const weatherResponse = await fetch(
+            `https://api.open-meteo.com/v1/forecast?${weatherParams}`
+          );
+          if (!weatherResponse.ok) throw new Error("Could not load the weather.");
+
+          const data = await weatherResponse.json();
+          const current = data.current;
+          if (!current) throw new Error("Weather data is unavailable for that city.");
+
+          document.querySelector("#location").textContent =
+            [place.name, place.country].filter(Boolean).join(", ");
+          document.querySelector("#temperature").textContent =
+            `${Math.round(current.temperature_2m)}°C`;
+          document.querySelector("#condition").textContent =
+            conditions[current.weather_code] ?? "Conditions unavailable";
+          message.hidden = true;
+          weather.hidden = false;
+        } catch (error) {
+          message.textContent = error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.";
+        } finally {
+          button.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
